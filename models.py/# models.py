@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from database import Base
 
 class User(Base):
-    _tablename_ = "users"
+    __tablename__= "users"
     id = Column(Integer, primary_key=True)
     name = Column(String)
     email = Column(String, unique=True)
@@ -10,13 +10,13 @@ class User(Base):
     role = Column(String, default="user")
 
 class Resource(Base):
-    _tablename_ = "resources"
+    __tablename__ = "resources"
     id = Column(Integer, primary_key=True)
     name = Column(String)
     quantity = Column(Integer)
 
 class Request(Base):
-    _tablename_ = "requests"
+    __tablename__ = "requests"
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     resource_id = Column(Integer, ForeignKey("resources.id"))
