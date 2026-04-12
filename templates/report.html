@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Disaster - NexAid</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    /* Keeping your background style */
+   background-color: #33564a;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The glassmorphism card */
+.report-box {
+    width: 450px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.6); /* Slightly darker for better readability */
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    letter-spacing: 2px;
+}
+
+/* Wrapper for inputs */
+.input-container {
+    position: relative;
+    width: 350px;
+    border-bottom: 2px solid #fff;
+    margin: 25px 0;
+}
+
+/* Shared style for inputs and select */
+.report-input, .report-text {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    color: #fff;
+    padding: 10px 5px;
+}
+
+/* Specific styling for the dropdown arrow */
+.report-input option {
+    background: #333; /* Dark background for dropdown options */
+    color: #fff;
+}
+
+/* Styling for the description box */
+.report-text {
+    height: 80px;
+    resize: none; /* Prevents user from breaking the UI */
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Submit button */
+.submit-button {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    background: #fff;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+p > a {
+    display: block;
+    margin-top: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+p > a:hover {
+    text-decoration: underline;
+    opacity: 1;
+}
+    </style>
+</head>
+<body>
+    <div class="report-box">
+        <h2>Report Emergency</h2>
+        <form action="/submit-report" method="POST">
+            
+            <div class="input-container">
+                <select name="emergency-type" class="report-input" required>
+                    <option value="" disabled selected>Type of Emergency</option>
+                    <option value="flood">Flood</option>
+                    <option value="earthquake">Earthquake</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <input type="text" name="location" class="report-input" placeholder="Location (Address or Coordinates)" required>
+            </div>
+
+            <div class="input-container">
+                <textarea name="description" class="report-text" placeholder="Describe the situation..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Send Report</button>
+            
+            <p><a href="/">← Back to Home Page</a></p>
+        </form>
+    </div>
+</body>
+</html>

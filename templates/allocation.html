@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Allocation - Admin</title>
+<style>
+/* Eye-Soothing Background */
+.admin-body {
+    background-color: #f0f4f3; /* Very light minty gray */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* The Main Card */
+.allocation-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 550px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Very soft shadow */
+    border-top: 5px solid #33564a; /* Your teal color as a top accent */
+}
+
+.card-header {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.card-header h2 {
+    color: #33564a;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.card-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Form Layout */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.field-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+}
+
+/* Designed Inputs */
+.field-group input, 
+.field-group select {
+    padding: 12px;
+    border: 1px solid #d1d9d7;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: all 0.2s ease;
+}
+
+.field-group input:focus, 
+.field-group select:focus {
+    outline: none;
+    border-color: #33564a;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(51, 86, 74, 0.1);
+}
+
+/* The Button */
+.admin-btn {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #33564a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.admin-btn:hover {
+    background-color: #243d35;
+}
+
+.card-footer {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.card-footer a {
+    color: #777;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.card-footer a:hover {
+    color: #33564a;
+    text-decoration: underline;
+}
+
+
+
+</style>
+</head>
+<body class="admin-body">
+    <div class="allocation-card">
+        <div class="card-header">
+            <h2>Resource Allocation</h2>
+            <p>Assign ODRAF teams and resources to pending requests</p>
+        </div>
+
+        <form action="/allocate" method="POST" class="admin-form">
+            <div class="form-row">
+                <div class="field-group">
+                    <label>Victim ID / Area</label>
+                    <input type="text" name="target" placeholder="e.g. Area-7 (Puri)" required>
+                </div>
+                
+                <div class="field-group">
+                    <label>Priority Level</label>
+                    <select name="priority" class="priority-select">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High / Emergency</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label>Resource Type</label>
+                <select name="resource" required>
+                    <option value="food">Food Supplies</option>
+                    <option value="medical">Medical Aid</option>
+                    <option value="water">Water Tanker</option>
+                    <option value="rescue">Rescue Boat (ODRAF)</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Assigned Unit/Team</label>
+                <input type="text" name="team" placeholder="e.g. ODRAF Unit 04" required>
+            </div>
+
+            <div class="field-group">
+                <label>Quantity/Volume</label>
+                <input type="number" name="qty" placeholder="Units being dispatched" required>
+            </div>
+
+            <button type="submit" class="admin-btn">Confirm Dispatch</button>
+        </form>
+        
+        <div class="card-footer">
+            <a href="/">Return to home page</a>
+        </div>
+    </div>
+</body>
+</html>

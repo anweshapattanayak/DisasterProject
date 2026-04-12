@@ -28,5 +28,6 @@ def register(name: str = Form(...), email: str = Form(...), password: str = Form
 def login(email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == email).first()
     if user and utils.verify_password(password, user.password):
-        return {"msg": "success", "role": user.role}
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/dashboard", status_code=303)
     return {"msg": "invalid"}

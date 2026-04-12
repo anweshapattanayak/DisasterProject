@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Access Level - NexAid</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .access-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 50px;
+        }
+        .access-card {
+            background: white;
+            width: 280px;
+            height: 320px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-top: 5px solid #33564a;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .access-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(51, 86, 74, 0.2);
+        }
+        .access-card i {
+            font-size: 50px;
+            color: #33564a;
+            margin-bottom: 15px;
+        }
+        .access-card h3 {
+            color: #33564a;
+            margin-bottom: 10px;
+        }
+        .access-card p {
+            color: #666;
+            font-size: 14px;
+            flex-grow: 1;
+        }
+        .enter-btn {
+            background: #33564a;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body class="admin-body">
+    <div style="text-align: center; width: 100%;">
+        <h1 style="color: #33564a; margin-top: 50px;">NexAid Access Portal</h1>
+        <p style="color: #666;">Please select your role to proceed to your dedicated dashboard.</p>
+        
+        <div class="access-container">
+            <div class="access-card" onclick="location.href='allocation-page'">
+                <h3>Admin</h3>
+                <p>Access Resource Allocation, Volunteer Management, and full system tracking.</p>
+                <div class="enter-btn">Go to Admin Panel</div>
+            </div>
+
+            <div class="access-card" onclick="location.href='volunteer-page'">
+                <h3>Volunteer</h3>
+                <p>Check availability, view assigned rescue tasks, and report status from the field.</p>
+                <div class="enter-btn">Go to Volunteer Hub</div>
+            </div>
+
+            <div class="access-card" onclick="location.href='report-page'">
+                <h3>Victim / Citizen</h3>
+                <p>Request food, water, or medical aid and report local disaster incidents.</p>
+                <div class="enter-btn">Request Assistance</div>
+            </div>
+        </div>
+        
+        <a href="/" style="color: #33564a; text-decoration: none; font-weight: bold;">← Back to Home</a>
+    </div>
+</body>
+</html>
