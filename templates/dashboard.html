@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        h2 { color: green; }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>🚨 Disaster Dashboard</h2>
+
+<form action="/reports/create" method="post">
+    <input name="title" placeholder="Report Title" required>
+    <input name="description" placeholder="Description" required>
+    <button type="submit">Create Report</button>
+</form>
+
+<br>
+
+<a href="/reports/">View Reports</a>
+
+</body>
+</html>
