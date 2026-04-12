@@ -27,7 +27,10 @@ def create_request(resource_id: int = Form(...), quantity: int = Form(...), prio
 
 @router.get("/allocate")
 def allocate(db: Session = Depends(get_db)):
-    reqs = db.query(models.Request).order_by(
+
+    reqs = db.query(models.Request).filter(
+        models.Request.status == "pending"
+    ).order_by(
         case(
             (models.Request.priority == "high", 1),
             (models.Request.priority == "medium", 2),
@@ -35,13 +38,36 @@ def allocate(db: Session = Depends(get_db)):
         )
     ).all()
 
+    result = []
+
     for r in reqs:
-        res = db.query(models.Resource).filter(models.Resource.id == r.resource_id).first()
-        if res and res.quantity >= r.quantity:
-            res.quantity -= r.quantity
-            r.status = "approved"
+        res = db.query(models.Resource).filter(
+            models.Resource.id == r.resource_id
+        ).first()
+
+        if res:
+            if res.quantity >= r.quantity:
+                res.quantity -= r.quantity
+                r.status = "approved"
+
+            elif res.quantity > 0:
+                r.status = "partially approved"
+                res.quantity = 0
+
+            else:
+                r.status = "rejected"
         else:
             r.status = "rejected"
 
+        result.append({
+            "request_id": r.id,
+            "priority": r.priority,
+            "status": r.status
+        })
+
     db.commit()
-    return {"msg": "allocated"}
+
+    return {
+        "msg": "allocation done",
+        "result": result
+    }
