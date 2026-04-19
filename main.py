@@ -5,7 +5,6 @@ from fastapi.responses import RedirectResponse
 
 from database import engine
 import models
-
 import auth
 import routes
 
@@ -43,4 +42,4 @@ def dashboard(request: Request):
     if not user_id:
         return RedirectResponse(url="/")
 
-    return templates.TemplateResponse("dashboard.html", {"request": request})git init
+    return templates.TemplateResponse("dashboard.html", {"request": request})
