@@ -1,5 +1,7 @@
 CREATE DATABASE disaster_db;
 
+-- Run below AFTER connecting to disaster_db
+
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     name VARCHAR,

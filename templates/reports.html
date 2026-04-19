@@ -1,8 +1,26 @@
-<h2>Disaster Reports</h2>
+<h2>Reports</h2>
 
-{% for r in reports %}
-    <div style="border:1px solid black; padding:10px; margin:10px;">
-        <h3>{{ r.title }}</h3>
-        <p>{{ r.description }}</p>
-    </div>
-{% endfor %}
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Resource ID</th>
+        <th>Quantity</th>
+        <th>Priority</th>
+        <th>Status</th>
+    </tr>
+
+    {% for r in requests %}
+    <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.user_id }}</td>
+        <td>{{ r.resource_id }}</td>
+        <td>{{ r.quantity }}</td>
+        <td>{{ r.priority }}</td>
+        <td>{{ r.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>

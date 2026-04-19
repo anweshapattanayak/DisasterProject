@@ -1,50 +1,30 @@
-from fastapi import APIRouter, Depends, Form
+from fastapi import APIRouter, Depends, Form, Request
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from database import get_db
-import models
-from passlib.context import CryptContext
+from database import SessionLocal
+import models, utils
 
-router = APIRouter(prefix="/auth")
+router = APIRouter()
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
-@router.post("/register")
-def register(
-    username: str = Form(...),
-    password: str = Form(...),
-    db: Session = Depends(get_db)
-):
-    user = db.query(models.User).filter(models.User.username == username).first()
-
-    if user:
-        return {"message": "User already exists"}
-
-    hashed = pwd_context.hash(password)
-
-    new_user = models.User(
-        username=username,
-        hashed_password=hashed
-    )
-
-    db.add(new_user)
-    db.commit()
-
-    return {"message": "User created successfully"}
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 @router.post("/login")
-def login(
-    username: str = Form(...),
-    password: str = Form(...),
-    db: Session = Depends(get_db)
-):
-    user = db.query(models.User).filter(models.User.username == username).first()
+def login(request: Request,
+          email: str = Form(...),
+          password: str = Form(...),
+          db: Session = Depends(get_db)):
 
-    if not user:
-        return {"message": "Invalid user"}
+    user = db.query(models.User).filter(models.User.email == email).first()
 
-    if not pwd_context.verify(password, user.hashed_password):
-        return {"message": "Wrong password"}
+    if user and utils.verify_password(password, user.password):
+        response = RedirectResponse(url="/dashboard", status_code=302)
+        response.set_cookie(key="user_id", value=str(user.id))
+        return response
 
-    return {"message": "Login successful"}
+    return RedirectResponse(url="/", status_code=302)
