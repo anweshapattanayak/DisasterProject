@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 from fastapi import APIRouter, Depends, Form, Request
+=======
+from fastapi import APIRouter, Depends, Form
+>>>>>>> origin/front-end
 from sqlalchemy.orm import Session
 from sqlalchemy import case
 from database import SessionLocal
 import models
+<<<<<<< HEAD
 from fastapi.templating import Jinja2Templates
 
 router = APIRouter()
@@ -12,6 +17,11 @@ templates = Jinja2Templates(directory="templates")
 
 
 # Database connection
+=======
+
+router = APIRouter()
+
+>>>>>>> origin/front-end
 def get_db():
     db = SessionLocal()
     try:
@@ -19,6 +29,7 @@ def get_db():
     finally:
         db.close()
 
+<<<<<<< HEAD
 
 # Create request
 @router.post("/request")
@@ -28,6 +39,10 @@ def create_request(
     priority: str = Form(...),
     db: Session = Depends(get_db)
 ):
+=======
+@router.post("/request")
+def create_request(resource_id: int = Form(...), quantity: int = Form(...), priority: str = Form(...), db: Session = Depends(get_db)):
+>>>>>>> origin/front-end
     req = models.Request(
         user_id=1,
         resource_id=resource_id,
@@ -36,6 +51,7 @@ def create_request(
     )
     db.add(req)
     db.commit()
+<<<<<<< HEAD
     return {"msg": "Request added successfully"}
 
 
@@ -43,6 +59,16 @@ def create_request(
 @router.get("/allocate")
 def allocate(db: Session = Depends(get_db)):
     reqs = db.query(models.Request).order_by(
+=======
+    return {"msg": "request added"}
+
+@router.get("/allocate")
+def allocate(db: Session = Depends(get_db)):
+
+    reqs = db.query(models.Request).filter(
+        models.Request.status == "pending"
+    ).order_by(
+>>>>>>> origin/front-end
         case(
             (models.Request.priority == "high", 1),
             (models.Request.priority == "medium", 2),
@@ -50,11 +76,17 @@ def allocate(db: Session = Depends(get_db)):
         )
     ).all()
 
+<<<<<<< HEAD
+=======
+    result = []
+
+>>>>>>> origin/front-end
     for r in reqs:
         res = db.query(models.Resource).filter(
             models.Resource.id == r.resource_id
         ).first()
 
+<<<<<<< HEAD
         if res and res.quantity >= r.quantity:
             res.quantity -= r.quantity
             r.status = "approved"
@@ -77,3 +109,31 @@ def view_reports(request: Request, db: Session = Depends(get_db)):
             "requests": reqs
         }
     )
+=======
+        if res:
+            if res.quantity >= r.quantity:
+                res.quantity -= r.quantity
+                r.status = "approved"
+
+            elif res.quantity > 0:
+                r.status = "partially approved"
+                res.quantity = 0
+
+            else:
+                r.status = "rejected"
+        else:
+            r.status = "rejected"
+
+        result.append({
+            "request_id": r.id,
+            "priority": r.priority,
+            "status": r.status
+        })
+
+    db.commit()
+
+    return {
+        "msg": "allocation done",
+        "result": result
+    }
+>>>>>>> origin/front-end

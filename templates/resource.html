@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Resource Request - NexAid</title>
+    <style>
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    /* Eye-soothing Dark Teal/Green Gradient */
+    background: linear-gradient(135deg, #2c4c41 0%, #33564a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* The glassmorphism card */
+.report-box {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1); /* Lighter glass effect */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-size: 1.6em;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* Wrapper for inputs */
+.input-container {
+    position: relative;
+    width: 350px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    margin: 20px 0;
+    transition: 0.3s;
+}
+
+.input-container:focus-within {
+    border-bottom: 2px solid #fff; /* Brighten on focus */
+}
+
+/* Shared style for inputs and select */
+.report-input, .report-text {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.05em;
+    color: #fff;
+    padding: 10px 5px;
+}
+
+/* Fix for the dropdown/select arrow */
+select.report-input {
+    cursor: pointer;
+}
+
+.report-input option {
+    background: #2c4c41; /* Matches the background theme */
+    color: #fff;
+}
+
+/* Styling for the description box */
+.report-text {
+    height: 70px;
+    resize: none;
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Submit button */
+.submit-button {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid #fff;
+    background: #fff;
+    color: #2c4c41;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background: transparent;
+    color: #fff;
+}
+
+p > a {
+    display: block;
+    margin-top: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9em;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+p > a:hover {
+    text-decoration: underline;
+    opacity: 1;
+}
+  </style>
+</head>
+<body>
+    <div class="report-box">
+        <h2>Resource Request</h2>
+        
+        <form action="/submit-request" method="POST">
+            <div class="input-container">
+                <select name="resource_type" class="report-input" required>
+                    <option value="" disabled selected>Select Resource Type</option>
+                    <option value="food">Food Supplies</option>
+                    <option value="medical">Medical Aid</option>
+                    <option value="water">Drinking Water</option>
+                    <option value="rescue">Victim Rescue</option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <input type="number" name="quantity" class="report-input" placeholder="Number of People / Quantity" required>
+            </div>
+
+            <div class="input-container">
+                <input type="text" name="location" class="report-input" placeholder="Current Location / Landmark" required>
+            </div>
+
+            <div class="input-container">
+                <input type="tel" name="contact" class="report-input" placeholder="Emergency Contact Number" required>
+            </div>
+
+            <div class="input-container">
+                <textarea name="notes" class="report-text" placeholder="Additional details or urgency level..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Send Request</button>
+        </form>
+
+        <p><a href="/">← Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

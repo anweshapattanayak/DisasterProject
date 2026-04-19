@@ -1,3 +1,4 @@
+
 <h2>Reports</h2>
 
 <table border="1">
@@ -24,3 +25,107 @@
 
 <br>
 <a href="/dashboard">Back to Dashboard</a>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Reports - NexAid</title>
+    <style>
+        .report-wrap {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .report-header {
+            border-bottom: 2px solid #33564a;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .report-meta { font-size: 14px; color: #666; }
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .data-card {
+            background: #f9fbfb;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #33564a;
+            text-align: center;
+        }
+        .data-card h4 { margin: 0; color: #777; font-size: 14px; }
+        .data-card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: #33564a; }
+    </style>
+</head>
+<body class="admin-body">
+    <div class="report-wrap">
+        <div class="report-header">
+            <div>
+                <h1>Disaster Response Report</h1>
+                <p class="report-meta">Generated on: April 11, 2026 | NexAid Intelligence</p>
+            </div>
+        </div>
+
+        <div class="data-grid">
+            <div class="data-card">
+                <h4>Total Rescues</h4>
+                <p>1,248</p>
+            </div>
+            <div class="data-card">
+                <h4>Food Kits Distributed</h4>
+                <p>5,000+</p>
+            </div>
+            <div class="data-card">
+                <h4>Active Volunteers</h4>
+                <p>342</p>
+            </div>
+        </div>
+
+        <h3>Operational Summary</h3>
+        <p style="color: #555; line-height: 1.6;">
+            The current disaster response operation in the Odisha coastal belt has achieved a 92% efficiency rate in resource allocation. 
+            Medical aid remains the highest priority in Zone B, while water supplies have reached 100% saturation in Zone A.
+        </p>
+
+        <h3 style="margin-top: 30px;">Resource Efficiency</h3>
+        <table class="mgmt-table"> <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Requested</th>
+                    <th>Delivered</th>
+                    <th>Efficiency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Medical Aid</td>
+                    <td>450 Units</td>
+                    <td>410 Units</td>
+                    <td>91%</td>
+                </tr>
+                <tr>
+                    <td>Water Tankers</td>
+                    <td>80 Units</td>
+                    <td>80 Units</td>
+                    <td>100%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <a href="/" class="back-link" style="color: #33564a; text-decoration: none;">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
+
