@@ -1,5 +1,9 @@
+
 from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import RedirectResponse
+=======
+from fastapi import APIRouter, Depends, Form
+>>>>>>> auth-backend
 from sqlalchemy.orm import Session
 from database import SessionLocal
 import models, utils
@@ -12,6 +16,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 
 
 @router.post("/login")
@@ -28,3 +33,24 @@ def login(request: Request,
         return response
 
     return RedirectResponse(url="/", status_code=302)
+=======
+@router.post("/register")
+def register(name: str = Form(...), email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+    user = models.User(
+        name=name,
+        email=email,
+        password=utils.hash_password(password),
+        role="user"
+    )
+    db.add(user)
+    db.commit()
+    return {"msg": "Registered"}
+
+@router.post("/login")
+def login(email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.email == email).first()
+    if user and utils.verify_password(password, user.password):
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/dashboard", status_code=303)
+    return {"msg": "invalid"}
+
