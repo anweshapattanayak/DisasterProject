@@ -44,7 +44,7 @@ def dashboard(request: Request):
         return RedirectResponse(url="/")
 
     return templates.TemplateResponse("dashboard.html", {"request": request})
-=======
+
 from database import engine
 import models, auth, routes
 

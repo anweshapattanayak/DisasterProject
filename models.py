@@ -3,12 +3,12 @@ from database import Base
 
 class User(Base):
     __tablename__ = "users"
-<<<<<<< HEAD
+
 
     id = Column(Integer, primary_key=True, index=True)
-=======
+
     id = Column(Integer, primary_key=True)
->>>>>>> auth-backend
+
     name = Column(String)
     email = Column(String, unique=True, index=True)
     password = Column(String)
@@ -17,12 +17,12 @@ class User(Base):
 
 class Resource(Base):
     __tablename__ = "resources"
-<<<<<<< HEAD
+
 
     id = Column(Integer, primary_key=True, index=True)
-=======
+
     id = Column(Integer, primary_key=True)
->>>>>>> auth-backend
+
     name = Column(String)
     quantity = Column(Integer)
 
@@ -32,9 +32,9 @@ class Request(Base):
 
 
     id = Column(Integer, primary_key=True, index=True)
-=======
+
     id = Column(Integer, primary_key=True)
->>>>>>> auth-backend
+
     user_id = Column(Integer, ForeignKey("users.id"))
     resource_id = Column(Integer, ForeignKey("resources.id"))
     quantity = Column(Integer)
