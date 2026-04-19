@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends, Form, Request
 
 from fastapi import APIRouter, Depends, Form
->>>>>>> origin/front-end
+
 from sqlalchemy.orm import Session
 from sqlalchemy import case
 from database import SessionLocal
@@ -42,7 +42,7 @@ def create_request(
 
 @router.post("/request")
 def create_request(resource_id: int = Form(...), quantity: int = Form(...), priority: str = Form(...), db: Session = Depends(get_db)):
->>>>>>> origin/front-end
+
     req = models.Request(
         user_id=1,
         resource_id=resource_id,
