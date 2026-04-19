@@ -3,13 +3,12 @@ from database import Base
 
 class User(Base):
     __tablename__ = "users"
-<<<<<<< HEAD
+
 
 
     id = Column(Integer, primary_key=True, index=True)
 
-=======
->>>>>>> origin/front-end
+
     id = Column(Integer, primary_key=True)
 
     name = Column(String)
