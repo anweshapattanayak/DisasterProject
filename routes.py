@@ -1,3 +1,4 @@
+from fastapi.responses import RedirectResponse
 from fastapi import APIRouter, Depends, Form, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import case
@@ -37,15 +38,10 @@ def create_request(
 
 
 # ---------------- ALLOCATION ----------------
-@router.get("/allocate")
+@router.post("/allocate")
 def allocate(db: Session = Depends(get_db)):
-    reqs = db.query(models.Request).order_by(
-        case(
-            (models.Request.priority == "high", 1),
-            (models.Request.priority == "medium", 2),
-            else_=3
-        )
-    ).all()
+
+    reqs = db.query(models.Request).all()
 
     for r in reqs:
         res = db.query(models.Resource).filter(
@@ -59,8 +55,8 @@ def allocate(db: Session = Depends(get_db)):
             r.status = "rejected"
 
     db.commit()
-    return {"msg": "Allocation completed"}
 
+    return RedirectResponse("/reports", status_code=303)
 
 # ---------------- REPORTS ----------------
 @router.get("/reports")

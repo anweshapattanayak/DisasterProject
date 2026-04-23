@@ -1,11 +1,49 @@
-<h2>Dashboard</h2>
 
-<form action="/request" method="post">
-Resource ID:<input name="resource_id"><br>
-Qty:<input name="quantity"><br>
-Priority:<input name="priority"><br>
-<button>Request</button>
-</form>
 
-<a href="/allocate">Run Allocation</a>
-<a href=""/reports">View Reports</a>
+<link rel="stylesheet" href="/static/style.css">
+
+<body>
+
+<div class="page">
+
+    <!-- Center Title -->
+    <div class="top-header">
+        <h1>📊 Dashboard</h1>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="wrapper">
+
+        <!-- Side Menu -->
+        <div class="side-panel">
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/allocation">⚙️ Allocation</a>
+            <a href="/reports">📊 Reports</a>
+        </div>
+
+        <!-- Resource Allocation Card -->
+        <div class="main-card">
+            <h2>🚨 Resource Allocation</h2>
+
+            <form action="/allocate" method="post">
+                <input type="text" name="resource_id" placeholder="Resource ID" required>
+
+                <input type="number" name="qty" placeholder="Quantity" required>
+
+                <select name="priority">
+                    <option value="">Select Priority</option>
+                    <option value="high">🔥 High</option>
+                    <option value="medium">⚡ Medium</option>
+                    <option value="low">🟢 Low</option>
+                </select>
+
+                <button type="submit">Allocate</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+

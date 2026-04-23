@@ -87,7 +87,7 @@ def dash(request: Request):
 
 
 # THIS PART TELLS PYTHON HOW TO RUN THE FILE DIRECTLY
-if __name__ == "__main__":
+if __name__ == "_main_":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
 
@@ -102,9 +102,9 @@ def report_p(request: Request):
 def resource_p(request: Request):
     return templates.TemplateResponse(request, "resource.html")
 
-@app.get("/allocation-page")
+@app.get("/allocation")
 def allocation_p(request: Request):
-    return templates.TemplateResponse(request, "allocation.html")
+    return templates.TemplateResponse("allocation.html", {"request": request})
 
 @app.get("/volunteer-page")
 def volunteer_p(request: Request):
@@ -123,7 +123,6 @@ def reports_p(request: Request):
     return templates.TemplateResponse(request, "reports.html")
 
 # THIS PART TELLS PYTHON HOW TO RUN THE FILE DIRECTLY
-if __name__ == "__main__":
+if __name__ == "_main_":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
