@@ -1,4 +1,3 @@
-
 <h2>Reports</h2>
 
 <table border="1">
@@ -9,6 +8,8 @@
         <th>Quantity</th>
         <th>Priority</th>
         <th>Status</th>
+        <th>Verified</th>
+        <th>Action</th>
     </tr>
 
     {% for r in requests %}
@@ -19,12 +20,21 @@
         <td>{{ r.quantity }}</td>
         <td>{{ r.priority }}</td>
         <td>{{ r.status }}</td>
+        <td>{{ r.verified }}</td>
+
+        <td>
+            {% if request.session.get("role") == "volunteer" and not r.verified %}
+                <form action="/verify/{{ r.id }}" method="post">
+                    <button type="submit">Verify</button>
+                </form>
+            {% endif %}
+        </td>
     </tr>
     {% endfor %}
 </table>
 
 <br>
-<a href="/dashboard">Back to Dashboard</a>
+<a href="/allocation">Back to Dashboard</a>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +108,8 @@
         </p>
 
         <h3 style="margin-top: 30px;">Resource Efficiency</h3>
-        <table class="mgmt-table"> <thead>
+        <table class="mgmt-table">
+            <thead>
                 <tr>
                     <th>Resource</th>
                     <th>Requested</th>
@@ -121,11 +132,12 @@
                 </tr>
             </tbody>
         </table>
-
-        <div style="margin-top: 40px; text-align: center;">
-            <a href="/" class="back-link" style="color: #33564a; text-decoration: none;">← Back to Home</a>
-        </div>
-    </div>
+<div style="position:absolute; top:20px; right:20px;">
+    <a href="/logout">
+        <button style="padding:8px 15px; border:none; border-radius:20px; background:red; color:white; cursor:pointer;">
+            Logout
+        </button>
+    </a>
+</div>
 </body>
 </html>
-

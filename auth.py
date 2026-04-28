@@ -30,11 +30,14 @@ def register(
         password=utils.hash_password(password),
         role="user"
     )
+
     db.add(user)
     db.commit()
-    return RedirectResponse(url="/", status_code=302)
+
+    return RedirectResponse("/login-page", status_code=302)
 
 
+# ---------------- LOGIN (FIXED - SESSION ONLY) ----------------
 # ---------------- LOGIN ----------------
 @router.post("/login")
 def login(
@@ -46,8 +49,20 @@ def login(
     user = db.query(models.User).filter(models.User.email == email).first()
 
     if user and utils.verify_password(password, user.password):
-        response = RedirectResponse(url="/dashboard", status_code=302)
-        response.set_cookie(key="user_id", value=str(user.id))
-        return response
 
-    return RedirectResponse(url="/", status_code=302)
+        request.session["user_id"] = user.id
+        request.session["role"] = user.role
+
+        # ✅ RETURN TO WHERE USER CAME FROM
+        next_page = request.session.pop("next", None)
+        if next_page:
+            return RedirectResponse(next_page, status_code=302)
+
+        # ✅ ROLE BASED REDIRECT
+        if user.role == "volunteer":
+            return RedirectResponse("/reports-page", status_code=302)
+
+        # ✅ USER + ADMIN → GO TO HOME (FEATURE SECTION)
+        return RedirectResponse("/", status_code=302)
+
+    return RedirectResponse("/login-page", status_code=302)

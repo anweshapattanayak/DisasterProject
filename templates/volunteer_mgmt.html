@@ -1,158 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer Hub - NexAid</title>
+<meta charset="UTF-8">
+<title>Volunteer Hub - NexAid</title>
+
 <style>
+body {font-family:Arial;background:#f4f4f4;}
+
 .mgmt-wrapper {
-    width: 90%;
-    max-width: 1100px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+    width:90%;
+    margin:auto;
 }
 
 .mgmt-card {
-    background: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    border-left: 6px solid #33564a; /* Teal accent */
+    background:white;
+    padding:20px;
+    margin:20px 0;
 }
 
-.mgmt-card h3 {
-    color: #33564a;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-/* Inline Registration Form */
 .inline-form {
-    display: flex;
-    gap: 15px;
+    display:flex;
+    gap:10px;
 }
 
-.inline-form input, .inline-form select {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.inline-form input, select {
+    padding:10px;
 }
-
-/* Data Table Styling */
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.data-table th {
-    text-align: left;
-    padding: 12px;
-    background: #f8fbf9;
-    color: #33564a;
-    border-bottom: 2px solid #eee;
-}
-
-.data-table td {
-    padding: 15px 12px;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-/* Badges & Buttons */
-.badge {
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.available { background: #d4edda; color: #155724; }
-.busy { background: #fff3cd; color: #856404; }
-
-.assign-form {
-    display: flex;
-    gap: 5px;
-}
-
-.assign-form input {
-    padding: 5px;
-    font-size: 13px;
-    border: 1px solid #ccc;
-}
-
-.assign-form button, .primary-btn {
-    background: #33564a;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.disabled-btn {
-    background: #eee;
-    color: #999;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-}
-
 </style>
-  </head>
-<body class="admin-body">
+</head>
 
-    <div class="mgmt-wrapper">
-        
-        <div class="mgmt-card">
-            <h3>Register New Volunteer</h3>
-            <form action="/register-volunteer" method="POST" class="inline-form">
-                <input type="text" name="v_name" placeholder="Full Name" required>
-                <select name="v_skill">
-                    <option value="medical">Medical</option>
-                    <option value="rescue">Search & Rescue</option>
-                    <option value="logistics">Logistics</option>
-                    <option value="comm">Communication</option>
-                </select>
-                <button type="submit" class="primary-btn">Add Volunteer</button>
-            </form>
-        </div>
+<body>
 
-        <div class="mgmt-card">
-            <h3>Live Availability & Task Assignment</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Volunteer</th>
-                        <th>Skill</th>
-                        <th>Current Status</th>
-                        <th>Assign New Task</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Arjun Das</strong></td>
-                        <td>Medical</td>
-                        <td><span class="badge available">Available</span></td>
-                        <td>
-                            <form action="/assign" method="POST" class="assign-form">
-                                <input type="text" name="task" placeholder="e.g. Clinic A" required>
-                                <button type="submit">Deploy</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Lipa Ray</strong></td>
-                        <td>Rescue</td>
-                        <td><span class="badge busy">On Mission (Puri)</span></td>
-                        <td><button class="disabled-btn" disabled>In Field</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="mgmt-wrapper">
 
-    </div>
+<div class="mgmt-card">
+<h3>Register New Volunteer</h3>
+
+<form action="/add-volunteer" method="POST" class="inline-form">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<select name="skill">
+<option value="medical">Medical</option>
+<option value="rescue">Rescue</option>
+<option value="logistics">Logistics</option>
+</select>
+
+<button>Add Volunteer</button>
+
+</form>
+
+</div>
+
+</div>
 
 </body>
 </html>

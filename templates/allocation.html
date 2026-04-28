@@ -6,7 +6,6 @@
 </head>
 
 <body>
-
 <div class="page">
 
     <div class="top-header">
@@ -17,28 +16,47 @@
 
         <!-- Side Menu -->
         <div class="side-panel">
-            <a href="/dashboard">🏠 Dashboard</a>
+            
             <a href="/allocation" class="active">⚙️ Allocation</a>
-            <a href="/reports">📊 Reports</a>
+            <a href="/reports-page">📊 Reports</a>
         </div>
 
         <!-- Allocation Card -->
         <div class="main-card">
             <h2>🚨 Allocate Resources</h2>
 
-            <form action="/allocate" method="post">
-                <input type="text" name="resource_id" placeholder="Resource ID" required>
-                <input type="number" name="qty" placeholder="Quantity" required>
+            <<form action="/allocate" method="post">
 
-                <select name="priority">
-                    <option value="">Select Priority</option>
-                    <option value="high">🔥 High</option>
-                    <option value="medium">⚡ Medium</option>
-                    <option value="low">🟢 Low</option>
-                </select>
+    <input type="number" name="resource_id" placeholder="Resource ID" required>
 
-                <button type="submit">Allocate</button>
-            </form>
+    <input type="number" name="quantity" placeholder="Quantity" required>
+
+    <select name="priority" required>
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+    </select>
+
+    <button type="submit">Allocate</button>
+    
+
+</form>
+<a href="/logout" class="logout-btn">Logout</a>
+
+<div class="form-container">
+    <!-- your existing allocation form -->
+</div>
+            <!-- SUCCESS MESSAGE -->
+            {% if message %}
+                <p style="color: green; margin-top:10px;">{{ message }}</p>
+            {% endif %}
+
+            <!-- ERROR MESSAGE -->
+            {% if error %}
+                <p style="color: red; margin-top:10px;">{{ error }}</p>
+            {% endif %}
+
         </div>
 
     </div>
@@ -46,4 +64,4 @@
 </div>
 
 </body>
-</html>
+</html> 

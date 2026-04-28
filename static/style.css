@@ -120,3 +120,16 @@ button:hover {
     transform: translateY(-5px);
     transition: 0.3s;
 }
+
+.logout-btn {
+    position: fixed;   /* ✅ keeps it stable */
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: red;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 999;   /* ✅ stays above everything */
+}

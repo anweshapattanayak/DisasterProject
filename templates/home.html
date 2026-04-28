@@ -3,150 +3,169 @@
 <head>
     <title>Disaster Resource System</title>
     <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- ✅ LOGIN CHECK SCRIPT (NO UI CHANGE) -->
+    <script>
+        function goTo(page) {
+            const isLoggedIn = "{{ request.session.get('user_id') }}" !== "None";
+
+            if (!isLoggedIn) {
+                window.location.href = "/login-page";
+            } else {
+                window.location.href = page;
+            }
+        }
+    </script>
 </head>
+
 <body class="home-page" id="top">
+
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo">
-                <a href="#">NexAid</a>
+                <a href="/">NexAid</a>
             </div>
             <ul>
                 <li><a href="#top">HOME</a></li>
                 <li><a href="#features-section">FEATURES</a></li>
                 <li><a href="#weather">WEATHER</a></li>
                 <li><a href="#contact">CONTACT</a></li>
-                <li><button class="login-btn" onclick="location.href='/login-page'">LOGIN</button></li>
+
+                <!-- ✅ FIXED LOGIN / LOGOUT (ONLY CHANGE) -->
+                <li>
+                    {% if request.session.get("user_id") %}
+                        <button class="login-btn" onclick="location.href='/reports-page'">
+                            MY REPORTS
+                        </button>
+                        <button class="login-btn" onclick="location.href='/logout'">
+                            LOGOUT
+                        </button>
+                    {% else %}
+                        <button class="login-btn" onclick="location.href='/login-page'">
+                            LOGIN
+                        </button>
+                    {% endif %}
+                </li>
+
             </ul>
         </div>
     </nav>
 
+    <!-- HERO -->
     <div class="hero">
         <marquee behavior="scroll" direction="left" scrollamount="7">
-        <h1>Disaster Relief Resource Allocation System</h1>
-    </marquee>
-        <p>Smartly manage and allocate essential resources during emergencies to ensure quick response and better coordination for saving lives.</p>
-        <button class="btn" onclick="location.href='/register-page'">Register Here</button>
+            <h1>Disaster Relief Resource Allocation System</h1>
+        </marquee>
+
+        <p>
+            Smartly manage and allocate essential resources during emergencies 
+            to ensure quick response and better coordination for saving lives.
+        </p>
+
+        <button class="btn" onclick="location.href='/register-page'">
+            Register Here
+        </button>
     </div>
 
+    <!-- FEATURES -->
     <section class="features" id="features-section">
         <h2>Features of The System</h2>
+
         <div class="features-container">
-            <div class="feature-box" onclick="location.href='/login-page'">
-                <img src="/static/images/auth.png" alt="Auth">
-                <h3>User Authentication</h3>
-                <p>Secure login system for Admins, Victims, and Volunteers</p>
-            </div>
-            <div class="feature-box" onclick="location.href='/report-page'">
-                <img src="/static/images/report.jpg" alt="Report">
+
+            <div class="feature-box" onclick="goTo('/report-page')">
+                <img src="/static/images/report.jpg">
                 <h3>Disaster Reporting</h3>
                 <p>Report disasters with location, type, and severity</p>
-                </div>
-            <div class="feature-box" onclick="location.href='/resource-page'">
-                <img src="/static/images/request.png" alt="Request">
+            </div>
+
+            <div class="feature-box" onclick="goTo('/resource-page')">
+                <img src="/static/images/request.png">
                 <h3>Resource Requests</h3>
                 <p>Victims request food, water, medical aid</p>
             </div>
-          
-            <div class="feature-box" onclick="location.href='/allocation-page'">
-                <img src="/static/images/allocation.png" alt="Allocation">
+
+            <div class="feature-box" onclick="goTo('/allocation')">
+                <img src="/static/images/allocation.png">
                 <h3>Resource Allocation</h3>
                 <p>Admins allocate resources based on need</p>
             </div>
-            <div class="feature-box" onclick="location.href='/volunteer-page'">
-                <img src="/static/images/volunteer.jpg" alt="Volunteer">
+
+            <div class="feature-box" onclick="goTo('/volunteer-page')">
+                <img src="/static/images/volunteer.jpg">
                 <h3>Volunteer Management</h3>
                 <p>Register volunteers, assign tasks, track availability</p>
             </div>
-          
-            <div class="feature-box" onclick="location.href='/tracking-page'">
-                <img src="/static/images/tracking.png" alt="Tracking">
-                <h3>Real-Time Tracking</h3>
-                <p>Monitor resource status</p>
-            </div>
-            <div class="feature-box" onclick="location.href='/access-page'">
-                <img src="/static/images/access.jpg" alt="Access">
+
+            <div class="feature-box" onclick="goTo('/access-page')">
+                <img src="/static/images/access.jpg">
                 <h3>Role-Based Access</h3>
                 <p>Admins, Victims, Volunteers have permissions</p>
             </div>
-            <div class="feature-box" onclick="location.href='/reports-page'">
-                <img src="/static/images/reports.jpg" alt="Reports">
+
+            <div class="feature-box" onclick="goTo('/reports-page')">
+                <img src="/static/images/reports.jpg">
                 <h3>Detailed Reports</h3>
                 <p>Generate and view reports</p>
             </div>
+
         </div>
     </section>
-    <section class="weather-section" id="weather">
-    <div class="weather-container">
-        <h2>Live Weather Update</h2>
-        <div class="weather-flex">
-            <div class="weather-map">
-    <img src="/static/images/weather2.jpeg" alt="Weather Map" style="width:100%; height:100%; object-fit:cover;">
-</div>
 
-            <div class="weather-info">
-                <div class="current-weather">
-                    <h3>Thiruvananthapuram, Kerala</h3>
-                    <div class="temp-row">
-                        <span class="temp-main">30°C</span>
-                        <p>Mostly Cloudy <br> 30% chance of rain</p>
-                    </div>
-                    <div class="stats-grid">
-                        <div class="stat-item"><span>Wind</span><br>3.6km/h</div>
-                        <div class="stat-item"><span>Rainfall</span><br>30%</div>
-                        <div class="stat-item"><span>Humidity</span><br>75%</div>
+    <!-- WEATHER -->
+    <section class="weather-section" id="weather">
+        <div class="weather-container">
+            <h2>Live Weather Update</h2>
+
+            <div class="weather-flex">
+
+                <div class="weather-map">
+                    <img src="/static/images/weather2.jpeg" 
+                         style="width:100%; height:100%; object-fit:cover;">
+                </div>
+
+                <div class="weather-info">
+                    <div class="current-weather">
+                        <h3>Thiruvananthapuram, Kerala</h3>
+
+                        <div class="temp-row">
+                            <span class="temp-main">30°C</span>
+                            <p>Mostly Cloudy <br> 30% chance of rain</p>
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-item">Wind<br>3.6km/h</div>
+                            <div class="stat-item">Rainfall<br>30%</div>
+                            <div class="stat-item">Humidity<br>75%</div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="daily-forecast">
-                    <p>Daily Forecast</p>
-                    <div class="forecast-row">
-                        <div class="day"><span>Today</span><br><strong>36°</strong></div>
-                        <div class="day"><span>Fri</span><br><strong>37°</strong></div>
-                        <div class="day"><span>Sat</span><br><strong>37°</strong></div>
-                        <div class="day"><span>Sun</span><br><strong>37°</strong></div>
-                    </div>
-                </div>
+
             </div>
         </div>
-    </div>
-</section>
-<section class="emergency-contact-section" id="contact">
-    <div class="contact-header">
+    </section>
+
+    <!-- CONTACT -->
+    <section class="emergency-contact-section" id="contact">
         <h1>Emergency Contacts</h1>
-    </div>
 
-    <div class="contact-grid">
-        <div class="contact-card">
-            <h2>Police</h2>
-            <p>100</p>
+        <div class="contact-grid">
+            <div class="contact-card"><h2>Police</h2><p>100</p></div>
+            <div class="contact-card"><h2>ODRAF</h2><p>0674-2534177</p></div>
+            <div class="contact-card"><h2>Ambulance</h2><p>108</p></div>
+            <div class="contact-card"><h2>Email</h2><p>help@nexaid.org</p></div>
         </div>
 
-        <div class="contact-card">
-            <h2>ODRAF</h2>
-            <p>0674-2534177</p>
+        <div class="social-footer">
+            <h3>Follow NexAid</h3>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
         </div>
+    </section>
 
-        <div class="contact-card">
-            <h2>Ambulance</h2>
-            <p>108</p>
-        </div>
-
-        <div class="contact-card">
-            <h2>Email</h2>
-            <p class="email-text">help@nexaid.org</p>
-        </div>
-    </div>
-
-    <div class="social-footer">
-        <h3>Follow NexAid</h3>
-        <div class="social-links">
-            <a href="https://www.facebook.com/OSDMA.org/">Facebook</a>
-            <a href="https://www.instagram.com/osdma.odisha/">Instagram</a>
-            <a href="https://x.com/rdmodisha">Twitter</a>
-        </div>
-    </div>
-</section>
-
-    <script src="/static/js/script.js"></script>
 </body>
 </html>

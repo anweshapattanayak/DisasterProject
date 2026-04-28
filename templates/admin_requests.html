@@ -1,0 +1,15 @@
+<h2>All Requests</h2>
+
+{% for r in requests %}
+<div>
+    Resource: {{ r.resource_id }} |
+    Quantity: {{ r.quantity }} |
+    Status: {{ r.status }}
+
+    {% if r.status != "approved" %}
+    <form action="/approve-request/{{ r.id }}" method="post">
+        <button>Approve</button>
+    </form>
+    {% endif %}
+</div>
+{% endfor %}
