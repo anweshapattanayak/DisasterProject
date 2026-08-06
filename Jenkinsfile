@@ -19,6 +19,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests'
+                sh 'pip3 install pytest'
+                sh 'pytest'
             }
         }
 
