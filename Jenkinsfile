@@ -17,12 +17,12 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                echo 'Running tests'
-                sh 'pip3 install pytest'
-                sh 'pytest'
-            }
-        }
-
+    steps {
+        echo "Running tests"
+        sh '''
+        pip3 install pytest
+        export PATH=$PATH:/var/lib/jenkins/.local/bin
+        pytest test_main.py
+        '''
     }
 }
