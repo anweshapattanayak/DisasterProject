@@ -12,8 +12,8 @@ class User(Base):
 
 
 class Resource(Base):
-    __tablename__ = "resources"
-
+    __tablename__="resourses"
+    
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     quantity = Column(Integer)
